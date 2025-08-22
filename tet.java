@@ -4,7 +4,7 @@ public class tet{
     public String gmail;
 
     public tet(String hoten , int tuoi , String gmail) {
-        this.tuoi = tuoi;
+        this.tuoi = 20;
         this.gmail = gmail;
         this.hoten = hoten;
     }
@@ -33,5 +33,3 @@ public class tet{
         System.out.println("Gmail : " +gmail);
     }
 }
-
-
