@@ -1,3 +1,5 @@
+package src;
+
 public class Recursion {
 
     public static void printUsers(User[] users, int index) {

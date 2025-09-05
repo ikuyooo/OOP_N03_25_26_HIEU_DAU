@@ -1,3 +1,4 @@
+package src;
 public class Number{
     public int i;
 
