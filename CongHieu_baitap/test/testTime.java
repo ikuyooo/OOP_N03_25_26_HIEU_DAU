@@ -1,7 +1,4 @@
-package test;
-import src.User;
-import src.Recursion;
-import src.Time;
+
 public class testTime {
     public static void run() {
         Time t1 = new Time();
