@@ -8,11 +8,38 @@ Thành viên :
 
 2.Nguyễn Công Dậu
 
-Ứng dụng đặt phòng khách sạn dùng để quản lý khách sạn : 
+========================================================================
 
--Quản lý khách hàng :Thêm , sửa , xóa , tìm kiếm khách hàng. 
+Project xây dựng ứng dụng quản lý khách sạn.
 
--Quản lý phòng:Cập nhật trạng thái phòng (trống , đã đặt), loại phòng, giá phòng.  
+Yêu cầu chính: 
 
--Đặt phòng: Thông tin khách hàng , 
+-Giao diện: Sử dụng Java FX
+
+-Có chưc năng quản lý khách hàng, phòng, nhân viên, doanh thu
+
+-Và các chức năng khác.
+
+Cụ thể:
+
+-Quản lý khách hàng:
+
+  +Thêm, xóa, sửa, tìm kiếm khách hàng
+
+-Quản lý phòng:
+
+  +Thông tin các loại phòng(VIP,STANDARD...)
+
+  +Theo dõi trạng thái phòng(còn trống hay đã đầy).
+
+  +Giá cả của các phòng.
+
+-Quản lý nhân viên:
+
+  +Thông tin nhân viên
+
+  +Phân quyền(truy cập xóa, sửa, thêm, tìm kiếm phòng và khách hàng).
+
+-Dữ liệu được lưu trữ dưới dạng hệ quản trị dữ liệu(MySQl).
+   
 
