@@ -14,7 +14,7 @@ Project xây dựng ứng dụng quản lý khách sạn.
 
 Yêu cầu chính: 
 
--Giao diện: Sử dụng Java FX
+-Giao diện: Sử dụng Java Spring boot
 
 -Có chưc năng quản lý khách hàng, phòng, nhân viên, doanh thu
 
