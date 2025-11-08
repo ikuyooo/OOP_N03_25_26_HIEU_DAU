@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý khách sạn - Sơ đồ phòng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css"> </head>
+<body>
+    <div class="main-container">
+        <header class="app-header">
+            <div class="header-left">Quản lý khách sạn</div>
+            <div class="header-right">Hotline:0336999521</div>
+        </header>
+
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <nav class="main-nav">
+                    <div class="nav-section-title">Quản lý phòng</div>
+                    <ul>
+                        <li class="active"><a href="#">Sơ đồ phòng</a></li>
+                        <li><a href="#">Thêm phòng</a></li>
+                        <li><a href="#">Tìm phòng (Danh sách)</a></li>
+                    </ul>
+                    <div class="nav-section-title">Quản lý khách hàng</div>
+                    <ul>
+                        <li><a href="#">Tìm kiếm khách hàng</a></li>
+                    </ul>
+                    <div class="nav-section-title logout">
+                        <a href="#">Đăng xuất</a>
+                    </div>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <h1>Sơ đồ phòng</h1>
+
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="roomType">Loại phòng:</label>
+                        <select id="roomType" class="filter-select">
+                            <option value="all">Tất cả</option>
+                            <option value="SGL">SGL</option>
+                            <option value="DBL">DBL</option>
+                            <option value="VIP">VIP</option>
+                            <option value="TRPL">TRPL</option>
+                            <option value="TWN">TWN</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="roomStatus">Trạng thái phòng:</label>
+                        <select id="roomStatus" class="filter-select">
+                            <option value="all">Tất cả</option>
+                            <option value="available">Phòng trống</option>
+                            <option value="occupied">Phòng đầy</option>
+                            <option value="cleaning">Đang dọn</option>
+                        </select>
+                    </div>
+
+                    <div class="status-indicators">
+                        <span class="status-box available"></span> <span class="status-text">Phòng trống</span>
+                        <span class="status-box occupied"></span> <span class="status-text">Phòng đầy</span>
+                        <span class="status-box cleaning"></span> <span class="status-text">Đang dọn</span>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="icon-button"><i class="fas fa-sync-alt"></i></button>
+                        <button class="icon-button"><i class="fas fa-search-plus"></i></button>
+                    </div>
+
+                    <div class="search-box">
+                        <input type="text" placeholder="Tìm kiếm...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="room-sections">
+                    <section class="floor-section">
+                        <h2>Tầng 1</h2>
+                        <div class="room-grid">
+                            <a href="#" class="room-card available"><span>101</span><span>VIP</span></a>
+                            <a href="#" class="room-card available"><span>102</span><span>SGL</span></a>
+                            <a href="#" class="room-card vip"><span>103</span><span>VIP</span></a>
+                            <a href="#" class="room-card available"><span>104</span><span>SGL</span></a>
+                            <a href="#" class="room-card occupied"><span>105</span><span>DBL</span></a>
+                            <a href="#" class="room-card occupied"><span>106</span><span>VIP</span></a>
+                            <a href="#" class="room-card available"><span>107</span><span>SGL</span></a>
+                            <a href="#" class="room-card cleaning"><span>108</span><span>TRPL</span></a>
+                        </div>
+                    </section>
+
+                    <section class="floor-section">
+                        <h2>Tầng 2</h2>
+                        <div class="room-grid">
+                            <a href="#" class="room-card available"><span>201</span><span>TRPL</span></a>
+                            <a href="#" class="room-card vip"><span>202</span><span>VIP</span></a>
+                            <a href="#" class="room-card available"><span>203</span><span>SGL</span></a>
+                            <a href="#" class="room-card occupied"><span>204</span><span>DBL</span></a>
+                            <a href="#" class="room-card available"><span>205</span><span>TWN</span></a>
+                        </div>
+                    </section>
+
+                    <section class="floor-section">
+                        <h2>Tầng 3</h2>
+                        <div class="room-grid">
+                            <a href="#" class="room-card vip"><span>301</span><span>VIP</span></a>
+                            <a href="#" class="room-card available"><span>302</span><span>SGL</span></a>
+                            <a href="#" class="room-card occupied"><span>303</span><span>DBL</span></a>
+                            <a href="#" class="room-card cleaning"><span>304</span><span>TWN</span></a>
+                            <a href="#" class="room-card available"><span>305</span><span>TRPL</span></a>
+                        </div>
+                    </section>
+
+                    <section class="floor-section">
+                        <h2>Tầng 4</h2>
+                        <div class="room-grid">
+                            <a href="#" class="room-card occupied"><span>401</span><span>SGL</span></a>
+                            <a href="#" class="room-card available"><span>402</span><span>DBL</span></a>
+                            <a href="#" class="room-card cleaning"><span>403</span><span>VIP</span></a>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

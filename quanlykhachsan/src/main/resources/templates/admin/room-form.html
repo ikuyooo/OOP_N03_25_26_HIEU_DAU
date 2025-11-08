@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}" lang="vi">
+
+<head>
+    <title th:text="${isNew} ? 'Thêm phòng mới' : 'Chỉnh sửa phòng ' + ${room.code}"></title>
+    <th:block th:replace="~{fragments/head :: common_head(${isNew} ? 'Thêm phòng mới' : 'Chỉnh sửa phòng ' + ${room.code})}"></th:block>
+</head>
+
+<body>
+    <div layout:fragment="content" class="content-wrapper">
+        
+        <h1 class="dashboard-title" th:text="${isNew} ? '🏠 Thêm phòng mới' : '✍️ Chỉnh sửa phòng: ' + ${room.code}"></h1>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                
+                <form th:action="${isNew} ? @{/rooms/new} : @{/rooms/edit/{id}(id=${room.id})}" 
+                      th:object="${room}" 
+                      method="post">
+
+                    <input type="hidden" th:field="*{id}" th:if="${!isNew}"> 
+
+                    <div class="mb-3">
+                        <label for="code" class="form-label fw-bold">Mã phòng <span class="text-danger">(*)</span></label>
+                        <input type="text" th:field="*{code}" class="form-control" id="code" required 
+                               placeholder="Ví dụ: 101, 205" th:readonly="${!isNew}">
+                        <div th:if="${!isNew}" class="form-text">Mã phòng không thể thay đổi sau khi tạo.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="type" class="form-label fw-bold">Loại phòng <span class="text-danger">(*)</span></label>
+                        <select th:field="*{type}" class="form-select" id="type" required>
+                            <option value="">-- Chọn loại phòng --</option>
+                            <option value="SGL">SGL (Single)</option>
+                            <option value="DBL">DBL (Double)</option>
+                            <option value="TWN">TWN (Twin)</option>
+                            <option value="TRPL">TRPL (Triple)</option>
+                            <option value="VIP">VIP (VIP Suite)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="price" class="form-label fw-bold">Giá thuê (VNĐ/Đêm) <span class="text-danger">(*)</span></label>
+                        <input type="number" th:field="*{price}" class="form-control" id="price" required min="0" step="1000">
+                    </div>
+
+                    <div class="mb-3">
+                        
+                        <div th:if="${!isNew}">
+                            <label for="status" class="form-label fw-bold">Trạng thái phòng <span class="text-danger">(*)</span></label>
+                            <select th:field="*{status}" class="form-select" id="status" required>
+                                <option value="VACANT">VACANT (Trống)</option>
+                                <option value="OCCUPIED">OCCUPIED (Đang ở)</option>
+                                <option value="CLEANING">CLEANING (Dọn dẹp)</option>
+                                <option value="MAINTENANCE">MAINTENANCE (Bảo trì)</option>
+                            </select>
+                        </div>
+
+                        <div th:if="${isNew}">
+                            <input type="hidden" th:field="*{status}" value="VACANT">
+                            <div class="alert alert-info py-2">
+                                **Trạng thái mặc định:** Phòng mới sẽ được đặt là **VACANT (Trống)**.
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="description" class="form-label fw-bold">Mô tả chi tiết</label>
+                        <textarea th:field="*{description}" class="form-control" id="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <a th:href="@{/rooms/admin}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Quay lại
+                        </a>
+                        <button type="submit" class="btn btn-primary" th:text="${isNew} ? '💾 Lưu Phòng Mới' : '🔄 Cập nhật'">
+                            Lưu
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

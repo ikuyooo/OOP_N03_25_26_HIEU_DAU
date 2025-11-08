@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<aside class="sidebar" th:fragment="sidebar">
+    <nav class="main-nav">
+        <div class="nav-section-title">Quản lý phòng</div>
+        <ul>
+            <li th:class="${activePage == 'roomMap'} ? 'active' : ''">
+                <a th:href="@{/admin/room-map}">Sơ đồ phòng</a>
+            </li>
+            <li th:class="${activePage == 'roomForm'} ? 'active' : ''">
+                <a th:href="@{/admin/room-form}">Thêm phòng</a>
+            </li>
+            <li th:class="${activePage == 'roomList'} ? 'active' : ''">
+                <a th:href="@{/admin/room-list}">Tìm phòng (Danh sách)</a>
+            </li>
+        </ul>
+        
+        <div class="nav-section-title">Quản lý khách hàng</div>
+        <ul>
+            <li th:class="${activePage == 'customerSearch'} ? 'active' : ''">
+                <a th:href="@{/admin/customer-search}">Tìm kiếm khách hàng</a>
+            </li>
+        </ul>
+        
+        <div class="nav-section-title logout">
+            <a th:href="@{/logout}">Đăng xuất</a>
+        </div>
+    </nav>
+</aside>
+
+</html>

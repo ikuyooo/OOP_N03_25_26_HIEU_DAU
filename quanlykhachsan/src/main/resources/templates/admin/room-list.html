@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}" lang="vi">
+
+<head>
+    <title>Danh sách phòng</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        
+        <h1 class="dashboard-title">📋 Danh sách tất cả phòng</h1>
+
+        <div class="d-flex justify-content-between mb-3">
+            <a th:href="@{/rooms/new}" class="btn btn-success">
+                <i class="bi bi-plus-square"></i> Thêm phòng mới
+            </a>
+            <a th:href="@{/rooms/dashboard}" class="btn btn-info text-white">
+                <i class="bi bi-grid-fill"></i> Xem Sơ đồ phòng
+            </a>
+        </div>
+
+        <div th:if="${#lists.isEmpty(rooms)}" class="alert alert-info">
+            Chưa có phòng nào được tạo.
+        </div>
+
+        <table th:unless="${#lists.isEmpty(rooms)}" class="table table-striped table-hover align-middle bg-white shadow-sm">
+            <thead class="bg-light">
+                <tr>
+                    <th scope="col">Mã phòng</th>
+                    <th scope="col">Loại</th>
+                    <th scope="col">Giá (VNĐ)</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="room : ${rooms}">
+                    <td class="fw-bold" th:text="${room.code}">101</td>
+                    <td th:text="${room.type}">DBL</td>
+                    <td th:text="${#numbers.formatDecimal(room.price, 0, 'COMMA', 0, 'POINT')}">1500000</td>
+                    
+                    <td>
+                        <span th:class="|badge rounded-pill text-bg-
+                                ${room.status == 'VACANT' ? 'success' : 
+                                room.status == 'OCCUPIED' ? 'danger' : 
+                                room.status == 'CLEANING' ? 'warning' : 'secondary'}|"
+                              th:text="${room.status}">
+                            VACANT
+                        </span>
+                    </td>
+                    
+                    <td th:text="${#strings.substring(room.description, 0, #strings.length(room.description) > 50 ? 50 : #strings.length(room.description)) + (#strings.length(room.description) > 50 ? '...' : '')}">
+                        Mô tả phòng...
+                    </td>
+
+                    <td class="d-flex gap-2">
+                        <a th:href="@{/rooms/edit/{id}(id=${room.id})}" class="btn btn-sm btn-warning">
+                            <i class="bi bi-pencil"></i> Sửa
+                        </a>
+                        
+                        <form th:action="@{/rooms/delete/{id}(id=${room.id})}" method="post" 
+                              onsubmit="return confirm('Bạn có chắc chắn muốn xóa phòng ' + [[${room.code}]] + ' không?');">
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>
