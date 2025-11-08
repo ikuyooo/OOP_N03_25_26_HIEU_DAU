@@ -1,14 +1,13 @@
 package com.example.quanlykhachsan.model;
 
 import jakarta.persistence.*;
-// Đã xóa: import lombok.*
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 @Table(name = "bookings")
-// Đã xóa: @Data, @NoArgsConstructor, @AllArgsConstructor, @Builder
+
 public class Booking {
 
     @Id
@@ -50,13 +49,9 @@ public class Booking {
         }
     }
     
-    // --- CODE THÊM VÀO THỦ CÔNG ---
-
-    // 1. Constructor rỗng
+ 
     public Booking() {
     }
-
-    // 2. Getters và Setters
     public Long getId() {
         return id;
     }
