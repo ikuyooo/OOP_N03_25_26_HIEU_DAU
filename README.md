@@ -16,5 +16,5 @@ Mục tiêu dự án: Ứng dụng quản lý và đặt phòng khách sạn đ�
 
 ========================================================================
 
-Chức năng chính
+CHỨC NĂNG CHÍNH
 
