@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}" lang="vi">
+
+<head>
+    <title>Sơ đồ phòng</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        
+        <h1 class="dashboard-title">Sơ đồ phòng</h1>
+        
+        <div class="filter-row">
+            
+            <form th:action="@{/rooms/dashboard}" method="get" class="d-flex align-items-center gap-3">
+                
+                <div class="filter-group">
+                    <label for="roomType" class="form-label mb-0 fw-normal">Loại phòng:</label>
+                    <select id="roomType" name="type" class="form-select form-select-sm" style="width: auto;">
+                        <option value="ALL" th:selected="${selectedType == 'ALL'}">Tất cả</option>
+                        <option th:each="type : ${allRoomTypes}" 
+                                th:value="${type}" 
+                                th:text="${type}"
+                                th:selected="${type == selectedType}">
+                        </option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="roomStatus" class="form-label mb-0 fw-normal">Trạng thái phòng:</label>
+                    <select id="roomStatus" name="status" class="form-select form-select-sm" style="width: auto;">
+                        <option value="ALL" th:selected="${selectedStatus == 'ALL'}">Tất cả</option>
+                        <option th:each="status : ${allRoomStatuses}" 
+                                th:value="${status}" 
+                                th:text="${status}"
+                                th:selected="${status == selectedStatus}">
+                        </option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Lọc</button>
+            </form>
+
+            <div class="status-legend">
+                <div class="legend-item"><span class="legend-box vacant"></span> Phòng trống</div>
+                <div class="legend-item"><span class="legend-box occupied"></span> Phòng đầy</div>
+                <div class="legend-item"><span class="legend-box cleaning"></span> Đang dọn</div>
+                <div class="legend-item"><span class="legend-box maintenance"></span> Bảo trì</div>
+            </div>
+            
+            <div class="action-icons">
+                 <button><i class="bi bi-arrow-repeat"></i></button>
+                 <button><i class="bi bi-plus-circle"></i></button>
+            </div>
+        </div>
+        
+        <div th:if="${#maps.isEmpty(floors)}">
+             <div class="alert alert-warning">Không tìm thấy phòng nào.</div>
+        </div>
+
+        <div th:each="floorEntry : ${floors}" class="floor-section">
+            <h2 class="mt-0">Tầng [[${floorEntry.key}]]</h2>
+            
+            <div class="room-grid">
+                
+                <a th:each="room : ${floorEntry.value}" 
+                   href="#" 
+                   th:class="|room-card ${room.status}|" 
+                   data-bs-toggle="modal" 
+                   data-bs-target="#roomModal"
+                   th:attr="data-room-code=${room.code}, 
+                            data-room-type=${room.type}, 
+                            data-room-price=${room.price}, 
+                            data-room-status=${room.status}, 
+                            data-room-id=${room.id}">
+                    
+                    <span>[[${room.code}]]</span>
+                    <span>[[${room.type}]]</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="roomModal" tabindex="-1" aria-labelledby="roomModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="roomModalLabel">Chi tiết phòng: <strong id="modal-code"></strong></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Loại: <span id="modal-type"></span></p>
+                        <p>Giá: <span id="modal-price"></span></p>
+                        <p>Trạng thái: <span id="modal-status"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a id="editRoomLink" href="#" class="btn btn-warning">
+                            <i class="bi bi-pencil"></i> Sửa thông tin phòng
+                        </a>
+                        <a id="bookingLink" href="#" class="btn btn-success">
+                            <i class="bi bi-calendar-plus"></i> Tạo Booking / Check-in
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <th:block layout:fragment="scripts">
+        <script>
+            var roomModal = document.getElementById('roomModal');
+            roomModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var roomId = button.getAttribute('data-room-id'); 
+                var roomCode = button.getAttribute('data-room-code');
+                var roomType = button.getAttribute('data-room-type');
+                var roomPrice = button.getAttribute('data-room-price');
+                var roomStatus = button.getAttribute('data-room-status');
+                
+                document.getElementById('modal-code').textContent = roomCode;
+                document.getElementById('modal-type').textContent = roomType;
+                // Định dạng giá tiền
+                document.getElementById('modal-price').textContent = new Intl.NumberFormat('vi-VN').format(roomPrice) + ' VNĐ'; 
+                document.getElementById('modal-status').textContent = roomStatus;
+                
+                // Cập nhật link Chỉnh sửa phòng
+                var editLink = document.getElementById('editRoomLink');
+                editLink.setAttribute('href', '/rooms/edit/' + roomId);
+                
+                // Cập nhật link Tạo booking (Đã sửa lỗi: Dùng /bookings/admin/new?roomId=...)
+                var bookingLink = document.getElementById('bookingLink');
+                bookingLink.setAttribute('href', '/bookings/admin/new?roomId=' + roomId); 
+
+                // Nếu phòng đang bận, đổi màu nút Booking/Check-in
+                if (roomStatus !== 'VACANT') {
+                    bookingLink.textContent = 'Xem chi tiết Booking';
+                    bookingLink.classList.remove('btn-success');
+                    bookingLink.classList.add('btn-info');
+                } else {
+                    bookingLink.textContent = 'Tạo Booking / Check-in';
+                    bookingLink.classList.remove('btn-info');
+                    bookingLink.classList.add('btn-success');
+                }
+            });
+        </script>
+    </th:block>
+</body>
+</html>

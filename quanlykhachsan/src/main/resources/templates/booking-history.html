@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: common_head('Lịch sử đặt phòng')}"></head>
+
+<body>
+    <header th:replace="~{fragments/header :: common_header}"></header>
+
+    <main>
+        <h2>Lịch sử Đặt phòng của tôi</h2>
+        
+        <div th:if="${successMessage}" class="message success" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="message error" th:text="${errorMessage}"></div>
+
+        <div th:if="${bookings == null or bookings.empty}">
+            <p>Bạn chưa có đơn đặt phòng nào.</p>
+        </div>
+        
+        <table th:if="${bookings != null and not bookings.empty}">
+            <thead>
+                <tr>
+                    <th>Mã phòng</th>
+                    <th>Nhận phòng</th>
+                    <th>Trả phòng</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="booking : ${bookings}">
+                    <td th:text="${booking.room.code}">101</td>
+                    <td th:text="${#temporals.format(booking.checkInDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#temporals.format(booking.checkOutDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#temporals.format(booking.bookingDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#numbers.formatDecimal(booking.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
+                    <td th:text="${booking.status}">CONFIRMED</td>
+                    </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: common_footer}"></footer>
+</body>
+</html>

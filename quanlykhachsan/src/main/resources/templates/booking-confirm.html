@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: common_head('Xác nhận đặt phòng')}"></head>
+
+<body>
+    <header th:replace="~{fragments/header :: common_header}"></header>
+
+    <main>
+        <h2>Xác nhận Đặt phòng</h2>
+        
+        <div th:if="${room}">
+            <h3>Chi tiết phòng</h3>
+            <p><strong>Mã phòng:</strong> <span th:text="${room.code}"></span></p>
+            <p><strong>Loại phòng:</strong> <span th:text="${room.type}"></span></p>
+            <p><strong>Giá:</strong> <span th:text="${#numbers.formatDecimal(room.price, 0, 'COMMA', 0, 'POINT')} + ' VND/đêm'"></span></p>
+        </div>
+
+        <div style="margin-top: 1rem;">
+            <h3>Chi tiết đặt phòng</h3>
+            <p><strong>Nhận phòng:</strong> <span th:text="${#temporals.format(checkIn, 'dd/MM/yyyy')}"></span></p>
+            <p><strong>Trả phòng:</strong> <span th:text="${#temporals.format(checkOut, 'dd/MM/yyyy')}"></span></p>
+        </div>
+
+        <form th:action="@{/bookings/new}" method="post" style="margin-top: 2rem;">
+            <input type="hidden" name="roomId" th:value="${room.id}" />
+            <input type="hidden" name="checkIn" th:value="${checkIn}" />
+            <input type="hidden" name="checkOut" th:value="${checkOut}" />
+            
+            <button type="submit">Xác nhận Đặt phòng</button>
+        </form>
+        
+    </main>
+
+    <footer th:replace="~{fragments/footer :: common_footer}"></footer>
+</body>
+</html>

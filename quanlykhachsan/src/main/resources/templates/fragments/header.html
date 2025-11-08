@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6">
+<body>
+    <header th:fragment="common_header" class="public-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            
+            <a class="logo" th:href="@{/}">
+                <i class="bi bi-building"></i> Khách Sạn
+            </a>
+            
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/rooms/search}">Tìm phòng</a></li>
+
+                    <th:block sec:authorize="!isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-sm btn-outline-light me-2" th:href="@{/login}">
+                                <i class="bi bi-box-arrow-in-right"></i> Đăng nhập
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-sm btn-warning" th:href="@{/register}">
+                                <i class="bi bi-person-plus"></i> Đăng ký
+                            </a>
+                        </li>
+                    </th:block>
+
+                    <th:block sec:authorize="isAuthenticated()">
+                        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                             <a class="nav-link fw-bold text-warning" th:href="@{/rooms/dashboard}">
+                                <i class="bi bi-speedometer2"></i> Quản lý
+                             </a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i> 
+                                Chào, <span sec:authentication="name">User</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <form th:action="@{/logout}" method="post">
+                                        <button class="dropdown-item" type="submit">
+                                            <i class="bi bi-box-arrow-left"></i> Đăng xuất
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </th:block>
+                </ul>
+            </nav>
+        </div>
+    </header>
+</body>
+</html>
