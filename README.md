@@ -46,3 +46,7 @@ UML DỰ ÁN
 
 <img width="1037" height="608" alt="image" src="https://github.com/user-attachments/assets/7363c41f-a0d6-4b5c-b0e4-71a53bb1cf14" />
 
+GIAO DIỆN ỨNG DỤNG
+
+1.Giao diện ứng dụng đăng ký/đăng nhập
+
