@@ -10,37 +10,11 @@ Thành viên :
 
 ========================================================================
 
-Project xây dựng ứng dụng quản lý khách sạn.
+Project xây dựng ứng dụng quản lý và đặt phòng khách sạn.
 
-Yêu cầu chính: 
+Mục tiêu dự án: Ứng dụng quản lý và đặt phòng khách sạn được xây dựng nhằm hỗ trợ việc đặt phòng trực tuyến giúp người dùng nhanh gọn, thuận tiện và chính xác hơn.
 
--Giao diện: Sử dụng Java Spring boot
 
--Có chưc năng quản lý khách hàng, phòng, nhân viên, doanh thu
-
--Và các chức năng khác.
-
-Cụ thể:
-
--Quản lý khách hàng:
-
-  +Thêm, xóa, sửa, tìm kiếm khách hàng
-
--Quản lý phòng:
-
-  +Thông tin các loại phòng(VIP,STANDARD...)
-
-  +Theo dõi trạng thái phòng(còn trống hay đã đầy).
-
-  +Giá cả của các phòng.
-
--Quản lý nhân viên:
-
-  +Thông tin nhân viên
-
-  +Phân quyền(truy cập xóa, sửa, thêm, tìm kiếm phòng và khách hàng).
-
--Dữ liệu được lưu trữ dưới dạng hệ quản trị dữ liệu(MySQl).
 
 ========================================================================
 
