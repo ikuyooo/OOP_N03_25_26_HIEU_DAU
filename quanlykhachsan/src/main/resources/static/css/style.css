@@ -1,0 +1,269 @@
+/* ===================================
+   1. COMMON CSS (Header Public, Login Page)
+   =================================== */
+/* Header Public */
+.public-header {
+    background-color: #343a40; 
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.public-header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+.public-header .nav .nav-link {
+    color: #adb5bd; 
+    padding: 0.5rem 1rem;
+    transition: color 0.2s;
+}
+.public-header .nav .nav-link:hover {
+    color: #fff;
+}
+
+/* Login Page Background */
+.login-page {
+    /* Đặt nền mờ như ảnh bạn gửi */
+    background: url('../images/background.jpg') no-repeat center center fixed; /* Giả định bạn có ảnh background.jpg trong static/images */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+}
+/* Overlay làm mờ */
+.login-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Lớp phủ đen mờ */
+}
+
+/* Login Box */
+.login-box {
+    background: rgba(255, 255, 255, 0.2); /* Nền mờ */
+    backdrop-filter: blur(10px); /* Hiệu ứng blur */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    width: 380px;
+    text-align: center;
+    z-index: 10;
+    color: #fff;
+}
+.login-box h2 {
+    margin-bottom: 25px;
+}
+.login-box .form-control {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 12px 15px;
+}
+.btn-login {
+    background-color: #28a745; /* Màu xanh lá cho Login */
+    color: white;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s;
+}
+.btn-login:hover {
+    background-color: #218838;
+}
+.register-link {
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+.register-link a {
+    color: #ffc107; /* Màu vàng nổi bật */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* ===================================
+   2. ADMIN LAYOUT CSS (layout.html)
+   =================================== */
+.admin-header {
+    background-color: #6f42c1; /* Màu tím đậm */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    height: 60px; /* Chiều cao cố định */
+}
+
+.admin-wrapper {
+    display: flex;
+    padding-top: 60px; /* Đẩy nội dung xuống dưới header */
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #f8f9fa; /* Nền xám nhạt */
+    padding: 20px 0;
+    position: fixed;
+    height: calc(100vh - 60px); /* Chiều cao bằng màn hình trừ header */
+    overflow-y: auto;
+    border-right: 1px solid #dee2e6;
+}
+
+.sidebar h6 {
+    color: #6c757d;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.sidebar .nav-link {
+    color: #343a40;
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.sidebar .nav-link:hover, .sidebar .nav-link.active {
+    background-color: #e9ecef;
+    color: #6f42c1;
+    font-weight: 500;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px; /* Trừ đi chiều rộng sidebar */
+    flex-grow: 1;
+    padding: 30px;
+    background-color: #fff;
+}
+
+.dashboard-title {
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #343a40;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 10px;
+}
+
+
+/* ===================================
+   3. ROOM DASHBOARD CSS (room-dashboard.html)
+   =================================== */
+
+/* Lọc và Chú thích */
+.filter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f1f3f5;
+    border-radius: 8px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-legend {
+    display: flex;
+    gap: 20px;
+}
+
+.legend-item {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.legend-box {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.legend-box.vacant { background-color: #28a745; }
+.legend-box.occupied { background-color: #dc3545; }
+.legend-box.cleaning { background-color: #ffc107; }
+.legend-box.maintenance { background-color: #6c757d; }
+
+.action-icons button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* Sơ đồ phòng */
+.floor-section h2 {
+    font-size: 1.75rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #495057;
+    border-left: 5px solid #6f42c1;
+    padding-left: 10px;
+}
+
+.room-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.room-card {
+    width: 120px;
+    height: 80px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; /* Bỏ gạch chân cho thẻ <a> */
+}
+
+.room-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.room-card span:first-child {
+    font-size: 1.4rem;
+    line-height: 1.2;
+}
+.room-card span:last-child {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Định nghĩa màu sắc cho các trạng thái */
+.room-card.VACANT { background-color: #28a745; } 
+.room-card.OCCUPIED { background-color: #dc3545; } 
+.room-card.CLEANING { background-color: #ffc107; color: #343a40; } /* Đang dọn */
+.room-card.MAINTENANCE { background-color: #6c757d; } /* Bảo trì */

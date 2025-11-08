@@ -1,0 +1,288 @@
+/* General Resets & Body Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6; /* Màu nền nhẹ nhàng */
+    color: #333;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styling */
+.app-header {
+    background-color: #7a7a8e; /* Màu xám đậm hơn */
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.header-right {
+    font-size: 1.1em;
+}
+
+/* Content Wrapper (Sidebar + Main Content) */
+.content-wrapper {
+    display: flex;
+    flex: 1; /* Cho phép phần này chiếm hết không gian còn lại */
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    border-right: 1px solid #eee;
+    
+    /* Thêm 2 dòng này để đảm bảo sidebar không bị co lại và có thể cuộn nếu cần */
+    flex-shrink: 0; 
+    height: calc(100vh - 70px); /* Chiều cao = 100% trừ đi header (giả sử header 70px) */
+    overflow-y: auto; /* Tự động cuộn nếu menu dài */
+}
+
+.nav-section-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+    padding: 15px 20px 10px;
+    margin-top: 15px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+.nav-section-title.logout {
+    margin-top: auto; /* Đẩy "Đăng xuất" xuống cuối */
+    border-top: 1px solid #eee;
+    border-bottom: none;
+    padding-top: 20px;
+}
+
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 5px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 1em;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar a:hover {
+    background-color: #e9e9e9;
+    color: #007bff;
+}
+
+.sidebar li.active a {
+    background-color: #e0e0e0;
+    font-weight: bold;
+    color: #007bff;
+    border-left: 4px solid #007bff;
+    padding-left: 16px; /* Điều chỉnh padding do border */
+}
+
+/* Main Content Styling */
+.main-content {
+    flex: 1; /* Chiếm hết không gian còn lại */
+    padding: 30px;
+    background-color: #f4f7f6;
+    overflow-y: auto; /* Cho phép cuộn nội dung chính */
+    height: calc(100vh - 70px); /* Chiều cao = 100% trừ đi header */
+}
+
+.main-content h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+/* Filter and Controls Styling */
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
+    align-items: center;
+    gap: 15px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.filter-group label {
+    margin-right: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.95em;
+    min-width: 120px;
+}
+
+.status-indicators {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.status-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.status-box.available { background-color: #4CAF50; } /* Xanh lá */
+.status-box.occupied { background-color: #F44336; } /* Đỏ */
+.status-box.cleaning { background-color: #FFC107; } /* Vàng */
+
+.status-text {
+    font-size: 0.9em;
+    color: #555;
+    margin-right: 5px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: auto; /* Đẩy các nút này sang phải */
+}
+
+.icon-button {
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 50%; /* Nút tròn */
+    width: 40px;
+    height: 40px;
+    font-size: 1.1em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.icon-button:hover {
+    background-color: #d0d0d0;
+}
+
+.search-box {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.search-box input {
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.95em;
+    outline: none;
+}
+
+.search-box button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-box button:hover {
+    background-color: #e0e0e0;
+}
+
+
+/* Room Sections & Grid Styling */
+.floor-section {
+    margin-bottom: 40px;
+}
+
+.floor-section h2 {
+    font-size: 1.6em;
+    color: #444;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.room-grid {
+    display: grid;
+    /* Tự động điều chỉnh số cột, mỗi cột tối thiểu 100px, tối đa 1fr */
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px; /* Khoảng cách giữa các card phòng */
+}
+
+.room-card {
+    background-color: #4CAF50; /* Màu mặc định: Xanh lá (Phòng trống) */
+    color: white;
+    padding: 15px 10px;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none; /* Bỏ gạch chân cho thẻ a */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 85px; /* Chiều cao tối thiểu của card */
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.room-card:hover {
+    transform: translateY(-3px); /* Hiệu ứng nổi lên khi hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.room-card span:first-child { /* Số phòng */
+    font-size: 1.3em;
+    margin-bottom: 3px;
+}
+
+.room-card span:last-child { /* Loại phòng */
+    font-size: 0.85em;
+    opacity: 0.9;
+}
+
+/* Specific Room Status Styling */
+.room-card.vip { /* Thêm màu đặc biệt cho phòng VIP nếu cần */
+    background-color: #673AB7; /* Màu tím chẳng hạn */
+}
+
+.room-card.occupied {
+    background-color: #F44336; /* Màu đỏ */
+}
+
+.room-card.cleaning {
+    background-color: #FFC107; /* Màu vàng */
+    color: #333; /* Chữ màu đen cho nền vàng */
+}
